@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import AppLoading from 'expo-app-loading'
 import { useFonts, Inter_600SemiBold, Inter_400Regular } from '@expo-google-fonts/inter'
 
-const Button = ({ button }) => {
+const Button = ({ button, onPressFunction }) => {
     let [fontsLoaded] = useFonts({
         Inter_600SemiBold,
         Inter_400Regular
@@ -17,6 +17,7 @@ const Button = ({ button }) => {
             <View style={styles.button}>
                 <TouchableOpacity 
                     style={styles.btn}
+                    onPress={onPressFunction}
                 >
                     <Text style={styles.btnText}>
                         {button}
@@ -30,12 +31,12 @@ const Button = ({ button }) => {
 const styles = StyleSheet.create({
     button: {
         height: 280,
-        padding: 15,
+        padding: 12,
     },
     btn: {
         backgroundColor: '#5DB075',
-        padding: 9,
-        margin: 5,
+        padding: 16,
+        marginVertical: 16,
         borderRadius: 50,
     },
     btnText: {

@@ -18,7 +18,6 @@ const Description = ({ text }) => {
         return (
             <View style={styles.description}>
                 <Text style={styles.text}>{text}</Text>
-                <Button button="Yes" />
             </View>
         )
     }
@@ -26,7 +25,7 @@ const Description = ({ text }) => {
 
 const styles = StyleSheet.create({
     description: {
-        height: 280,
+        maxHeight: 300,
         padding: 15,
     },
     text: {
