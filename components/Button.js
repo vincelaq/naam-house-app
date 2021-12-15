@@ -35,7 +35,8 @@ const styles = StyleSheet.create({
     },
     btn: {
         backgroundColor: '#5DB075',
-        padding: 16,
+        paddingVertical: 16,
+        paddingHorizontal: 160,
         marginVertical: 16,
         borderRadius: 50,
     },

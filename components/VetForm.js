@@ -4,7 +4,7 @@ import { View, TextInput, StyleSheet } from 'react-native'
 import Header from './Header'
 import Button from './Button'
 
-const VetForm = ({ nextStep, handleChange, values }) => {
+const VetForm = ({ nextStep, prevStep, handleChange, values }) => {
     
     const nextForm = (e) => {
         e.preventDefault()
@@ -12,10 +12,9 @@ const VetForm = ({ nextStep, handleChange, values }) => {
     }
     
 
-
     return (
-        <View>
-            <Header text="Veteran Info" />
+        <View style={styles.container}>
+            <Header prevStep={prevStep} text="Veteran Info" />
             <TextInput
                 placeholder='Name' 
                 onChange={handleChange('vetName')} 
@@ -47,6 +46,9 @@ const VetForm = ({ nextStep, handleChange, values }) => {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        paddingTop: 60
+    },
     input: {
         height: 60,
         padding: 16,

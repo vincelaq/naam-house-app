@@ -5,7 +5,7 @@ import Header from './Header'
 import Button from './Button'
 import Description from './Description'
 
-const ImageForm = ({ nextStep, handleChange, values }) => {
+const ImageForm = ({ nextStep, prevStep, handleChange, values }) => {
     
     const nextForm = (e) => {
         e.preventDefault()
@@ -15,8 +15,8 @@ const ImageForm = ({ nextStep, handleChange, values }) => {
 
 
     return (
-        <View>
-            <Header text="Images" />
+        <View style={styles.container}>
+            <Header prevStep={prevStep} text="Images" />
             <Description text="Upload any photos or videos that might help us locate person of interest" />
             <TextInput
                 placeholder='Add Images' 
@@ -33,6 +33,9 @@ const ImageForm = ({ nextStep, handleChange, values }) => {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        paddingTop: 60
+    },
     input: {
         height: 60,
         padding: 16,

@@ -2,10 +2,10 @@ import React from 'react'
 import { View, TextInput, StyleSheet } from 'react-native'
 
 import Header from './Header'
-import Description from './Description'
 import Button from './Button'
+import Description from './Description'
 
-const BehavForm = ({ nextStep, prevStep, handleChange, values }) => {
+const VetConfirm = ({ nextStep, prevStep }) => {
     
     const nextForm = (e) => {
         e.preventDefault()
@@ -16,16 +16,8 @@ const BehavForm = ({ nextStep, prevStep, handleChange, values }) => {
 
     return (
         <View style={styles.container}>
-            <Header prevStep={prevStep} text="Behavior" />
-            <Description text="What is the current state of the person of interest?" />
-            <TextInput
-                multiline={true}
-                numberOfLines={20}
-                placeholder='Describe current behavior' 
-                onChange={handleChange('behavior')} 
-                value={values.behavior} 
-                style={styles.input} 
-            />
+            <Header prevStep={prevStep} text="Are they a veteran?" />
+            <Description text="NAAM House aids veterans specifically. Try your best to find out if the person of interest is a veteran. If they won’t confirm they are, a key identifying features include clothing that might have military insignia or symbols." />
             <Button button="Next" onPressFunction={nextForm} />
         </View>
     )
@@ -36,7 +28,7 @@ const styles = StyleSheet.create({
         paddingTop: 60
     },
     input: {
-        height: 200,
+        height: 60,
         padding: 16,
         fontSize: 16,
         backgroundColor: '#F6F6F6',
@@ -49,4 +41,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default BehavForm
+export default VetConfirm

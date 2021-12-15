@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { View } from 'react-native'
 
+import Start from './Start'
+import VetConfirm from './VetConfirm'
 import VetForm from './VetForm'
 import BehavForm from './BehavForm'
 import ImageForm from './ImageForm'
@@ -31,6 +33,11 @@ const MainForm = () => {
         setStep(step-1)
     }
     
+    // Start over
+    const startOver = () => {
+      setStep(1)
+  }
+
     // Handle fields change
     const handleChange = input => (e) => {
         setState({
@@ -46,7 +53,7 @@ const MainForm = () => {
     switch (step) {
         case 1:
           return (
-            <VetForm
+            <Start
               nextStep={nextStep}
               handleChange={handleChange}
               values={values}
@@ -54,16 +61,16 @@ const MainForm = () => {
           );
         case 2:
           return (
-            <BehavForm
+            <VetConfirm
               nextStep={nextStep}
               prevStep={prevStep}
               handleChange={handleChange}
               values={values}
             />
-          );
+          );  
         case 3:
           return (
-            <ImageForm
+            <VetForm
               nextStep={nextStep}
               prevStep={prevStep}
               handleChange={handleChange}
@@ -72,7 +79,7 @@ const MainForm = () => {
           );
         case 4:
           return (
-            <ResForm
+            <BehavForm
               nextStep={nextStep}
               prevStep={prevStep}
               handleChange={handleChange}
@@ -81,14 +88,28 @@ const MainForm = () => {
           );
         case 5:
           return (
-            <Confirm
+            <ImageForm
               nextStep={nextStep}
               prevStep={prevStep}
+              handleChange={handleChange}
               values={values}
             />
           );
         case 6:
-          return <Success />;
+          return (
+            <ResForm
+              nextStep={nextStep}
+              prevStep={prevStep}
+              handleChange={handleChange}
+              values={values}
+            />
+          );
+        case 7:
+          return (
+            <Success 
+              startOver={startOver}
+            />
+          );
         default:
           (console.log('This is a multi-step form built with React.'))
       }

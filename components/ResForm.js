@@ -5,7 +5,7 @@ import Header from './Header'
 import Button from './Button'
 import Description from './Description'
 
-const ResForm = ({ nextStep, handleChange, values }) => {
+const ResForm = ({ nextStep, prevStep, handleChange, values }) => {
     
     const nextForm = (e) => {
         e.preventDefault()
@@ -15,8 +15,8 @@ const ResForm = ({ nextStep, handleChange, values }) => {
 
 
     return (
-        <View>
-            <Header text="Responder Info" />
+        <View style={styles.container}>
+            <Header prevStep={prevStep} text="Responder Info" />
             <Description text="Enter your contact information just in case we need to reach you for more information" />
             <TextInput
                 placeholder='Name' 
@@ -37,6 +37,9 @@ const ResForm = ({ nextStep, handleChange, values }) => {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        paddingTop: 60
+    },
     input: {
         height: 60,
         padding: 16,
