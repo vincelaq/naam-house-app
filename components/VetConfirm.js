@@ -16,7 +16,7 @@ const VetConfirm = ({ nextStep, prevStep }) => {
 
     return (
         <View style={styles.container}>
-            <Header prevStep={prevStep} text="Are they a veteran?" />
+            <Header prevStep={prevStep} text="Is person of interest a veteran?" />
             <Description text="NAAM House aids veterans specifically. Try your best to find out if the person of interest is a veteran. If they won’t confirm they are, a key identifying features include clothing that might have military insignia or symbols." />
             <Button button="Next" onPressFunction={nextForm} />
         </View>
