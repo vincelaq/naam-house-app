@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { View } from 'react-native'
+import * as Location from 'expo-location';
 
 import Start from './Start'
 import VetConfirm from './VetConfirm'
@@ -26,6 +27,7 @@ const MainForm = () => {
     
     const [isError, setIsError] = useState(false)
     const [message, setMessage] = useState('')
+    const [errorMsg, setErrorMsg] = useState(null);
 
     // Proceed to next step
     const nextStep = () => {
@@ -50,7 +52,14 @@ const MainForm = () => {
     const startOver = () => {
       setState(prevState => ({
         ...prevState,
-        step: 1
+        step: 1,
+        vetName: "",
+        curLocation: "",
+        freqLocation: "",
+        ping: "",
+        behavior: "",
+        resName: "",
+        resContact: "",
       }))
   }
 
@@ -60,6 +69,24 @@ const MainForm = () => {
             ...state,
             [input] : e.nativeEvent.text
         })
+        console.log(state)
+    }
+
+    // Handle location ping
+    const handlePing = async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('Permission to access location was denied');
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+
+      setState(prevState => ({
+        ...prevState,
+        ping: JSON.stringify(location)
+      }))
+
     }
 
     const { step, vetName, curLocation, freqLocation, ping, behavior, resName, resContact } = state 
@@ -130,6 +157,8 @@ const MainForm = () => {
               nextStep={nextStep}
               prevStep={prevStep}
               handleChange={handleChange}
+              handlePing={handlePing}
+              errorMsg={errorMsg}
               values={values}
             />
           );

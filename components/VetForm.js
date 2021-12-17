@@ -1,16 +1,24 @@
 import React from 'react'
-import { View, TextInput, StyleSheet } from 'react-native'
+import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
 
 import Header from './Header'
 import Button from './Button'
 
-const VetForm = ({ nextStep, prevStep, handleChange, values }) => {
+const VetForm = ({ nextStep, prevStep, handleChange, handlePing, errorMsg, values }) => {
     
     const nextForm = (e) => {
         e.preventDefault()
         nextStep()
     }
     
+
+    // Location shared message
+    let text = 'Share your current location';
+    if (errorMsg) {
+      text = errorMsg;
+    } else if (values.ping) {
+      text = "Location shared!";
+    }
 
     return (
         <View style={styles.container}>
@@ -20,7 +28,7 @@ const VetForm = ({ nextStep, prevStep, handleChange, values }) => {
                 onChange={handleChange('vetName')} 
                 value={values.vetName}
                 style={styles.input} 
-                
+
             />
             <TextInput
                 placeholder='Current Location' 
@@ -34,12 +42,16 @@ const VetForm = ({ nextStep, prevStep, handleChange, values }) => {
                 value={values.freqLocation} 
                 style={styles.input} 
             />
-            <TextInput
-                placeholder='Share Your Location' 
-                onChange={handleChange('ping')} 
-                value={values.ping} 
-                style={styles.input} 
-            />
+            <View style={styles.button}>
+                <TouchableOpacity 
+                    style={styles.btn}
+                    onPress={handlePing}
+                >
+                    <Text style={styles.btnText}>
+                        {text}
+                    </Text>
+                </TouchableOpacity>
+            </View>
             <Button button="Next" onPressFunction={nextForm} />
         </View>
     )
@@ -60,7 +72,23 @@ const styles = StyleSheet.create({
         marginVertical: 8,
         marginHorizontal: 16, 
         
-    }
+    },
+    button: {
+       marginHorizontal: 20,
+    },
+    btn: {
+        backgroundColor: '#E8E8E8',
+        paddingVertical: 16,
+        paddingHorizontal: 10,
+        marginVertical: 16,
+        borderRadius: 50,
+    },
+    btnText: {
+        color: '#000',
+        fontSize: 16,
+        textAlign: 'center',
+        fontFamily: 'Inter_600SemiBold',
+    },
 })
 
 export default VetForm
