@@ -23,7 +23,7 @@
 // })
 
 // export default App
-
+import { StatusBar } from 'expo-status-bar'
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
@@ -33,7 +33,7 @@ const App = () => {
   return (
     <View style={styles.container}>
         <MainForm />
-
+        <StatusBar style="auto" />
     </View>
   )
 }

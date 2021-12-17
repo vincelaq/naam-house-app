@@ -5,10 +5,11 @@ import Header from './Header'
 import Button from './Button'
 import Description from './Description'
 
-const ResForm = ({ nextStep, prevStep, handleChange, values }) => {
+const ResForm = ({ nextStep, prevStep, handleChange, handleSubmit, values }) => {
     
     const nextForm = (e) => {
         e.preventDefault()
+        handleSubmit()
         nextStep()
     }
     

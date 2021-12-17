@@ -20,7 +20,7 @@ const VetForm = ({ nextStep, prevStep, handleChange, values }) => {
                 onChange={handleChange('vetName')} 
                 value={values.vetName}
                 style={styles.input} 
-
+                
             />
             <TextInput
                 placeholder='Current Location' 

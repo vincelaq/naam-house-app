@@ -10,6 +10,8 @@ import ResForm from './ResForm'
 import Confirm from './Confirm'
 import Success from './Success'
 
+const API_URL = Platform.OS === 'ios' ? 'http://localhost:8000/api' : 'http://10.0.2.2:5000'
+
 const MainForm = () => {
     const [state, setState] = useState({
         step: 1,
@@ -21,35 +23,89 @@ const MainForm = () => {
         resName: "",
         resContact: "",
     })
-    const [step, setStep] = useState(1)
+    
+    const [isError, setIsError] = useState(false)
+    const [message, setMessage] = useState('')
 
     // Proceed to next step
     const nextStep = () => {
-        setStep(step+1)
+      
+        setState(prevState => ({
+          ...prevState,
+          step: prevState.step+1
+        }))
+
+
     }
 
     // Back to previous step
     const prevStep = () => {
-        setStep(step-1)
+      setState(prevState => ({
+        ...prevState,
+        step: prevState.step-1
+      }))
     }
     
     // Start over
     const startOver = () => {
-      setStep(1)
+      setState(prevState => ({
+        ...prevState,
+        step: 1
+      }))
   }
 
     // Handle fields change
     const handleChange = input => (e) => {
         setState({
             ...state,
-            [input] : e.target.value
+            [input] : e.nativeEvent.text
         })
     }
 
-    const { vetName, curLocation, freqLocation, ping, behavior, resName, resContact } = state 
+    const { step, vetName, curLocation, freqLocation, ping, behavior, resName, resContact } = state 
     const values = { vetName, curLocation, freqLocation, ping, behavior, resName, resContact }
 
+    const handleSubmit = () => {
+      const payload = {
+        "vetName": vetName, 
+        "curLocation": curLocation,
+        "freqLocation": freqLocation, 
+        "ping": ping, 
+        "behavior": behavior, 
+        "resName": resName, 
+        "resContact": resContact
+      }
+      fetch(`${API_URL}/form`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      })
+      .then(async res => {
+        try {
+          const jsonRes = await res.json()
+          if (res.status !== 200) {
+            setIsError(true)
+            setMessage(jsonRes.message)
+          } else {
+            setIsError(false)
+            setMessage(jsonRes.message)
+          }
+        } catch (err) {
+          console.log(err)
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    }
     
+    const getMessage = () => {
+      const status = isError ? `Error: ` : `Success: `;
+      return status + message;
+    }
+
     switch (step) {
         case 1:
           return (
@@ -101,6 +157,7 @@ const MainForm = () => {
               nextStep={nextStep}
               prevStep={prevStep}
               handleChange={handleChange}
+              handleSubmit={handleSubmit}
               values={values}
             />
           );
