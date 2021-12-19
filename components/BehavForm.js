@@ -20,7 +20,7 @@ const BehavForm = ({ nextStep, prevStep, handleChange, values }) => {
             <Description text="What is the current state of the person of interest?" />
             <TextInput
                 multiline={true}
-                numberOfLines={20}
+                numberOfLines={5}
                 placeholder='Describe current behavior' 
                 onChange={handleChange('behavior')} 
                 value={values.behavior} 
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
         paddingTop: 60
     },
     input: {
-        height: 200,
+        height: 125,
         padding: 16,
         fontSize: 16,
         backgroundColor: '#F6F6F6',

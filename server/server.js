@@ -4,7 +4,6 @@ const cors = require("cors");
 
 /* ==== Internal Modules ==== */
 const db = require('./models')
-const routes = require('./routes/routes');
 
 /* ==== Instanced Modules  ==== */
 const app = express();
@@ -18,8 +17,6 @@ app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-
-
 /* ====  Sequelize  ==== */
 db.sequelize.sync({ force: true }).then(() => {
 
@@ -27,6 +24,7 @@ db.sequelize.sync({ force: true }).then(() => {
     
 });
 
+/* ====  Routing  ==== */
 require("./routes/routes")(app);
 
 /* ====  Server Listener / Connection ==== */
