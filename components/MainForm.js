@@ -171,16 +171,16 @@ const MainForm = () => {
               values={values}
             />
           );
+        // case 5:
+        //   return (
+        //     <ImageForm
+        //       nextStep={nextStep}
+        //       prevStep={prevStep}
+        //       handleChange={handleChange}
+        //       values={values}
+        //     />
+        //   );
         case 5:
-          return (
-            <ImageForm
-              nextStep={nextStep}
-              prevStep={prevStep}
-              handleChange={handleChange}
-              values={values}
-            />
-          );
-        case 6:
           return (
             <ResForm
               nextStep={nextStep}
@@ -190,7 +190,7 @@ const MainForm = () => {
               values={values}
             />
           );
-        case 7:
+        case 6:
           return (
             <Success 
               startOver={startOver}
