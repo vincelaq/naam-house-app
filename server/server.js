@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 /* ==== External Modules ==== */
 const express = require("express");
 const cors = require("cors");

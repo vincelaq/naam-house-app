@@ -4,8 +4,8 @@ const Form = db.form;
 const Vonage = require('@vonage/server-sdk')
 
 const vonage = new Vonage({
-  apiKey: "cc8bc8df",
-  apiSecret: "xmgpJlSRdgmc16fy"
+  apiKey: process.env.VONAGE_API,
+  apiSecret: process.env.VONAGE_SECRET
 })
 
 exports.create = (req, res) => {
@@ -43,8 +43,8 @@ exports.create = (req, res) => {
   const shared = JSON.parse(req.body.ping)
   const lat = shared.coords.latitude
   const lng = shared.coords.longitude
-  const from = "18334569269"
-  const to = "19163203437"
+  const from = process.env.PHONEFROM
+  const to = process.env.PHONETO
   const text = `Reported -- 
     Name: ${req.body.vetName}, 
     Cur Loc: ${req.body.curLocation}, 
@@ -53,7 +53,7 @@ exports.create = (req, res) => {
     Behav: ${req.body.behavior}, 
     Reporter: ${req.body.resName}, 
     Rep Contact: ${req.body.resName},
-    comgooglemaps://?center=${lat},${lng}&zoom=14 ---`
+    comgooglemapsurl://maps.google.com/?q=@${lat},${lng} ---`
 
   vonage.message.sendSms(from, to, text, (err, responseData) => {
       if (err) {
