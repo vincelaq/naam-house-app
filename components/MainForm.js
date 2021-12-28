@@ -11,7 +11,7 @@ import ResForm from './ResForm'
 import Confirm from './Confirm'
 import Success from './Success'
 
-const API_URL = Platform.OS === 'ios' ? 'http://localhost:8000/api' : 'http://10.0.2.2:5000'
+const API_URL = 'https://naam-server.herokuapp.com/api'
 
 const MainForm = () => {
     const [state, setState] = useState({
